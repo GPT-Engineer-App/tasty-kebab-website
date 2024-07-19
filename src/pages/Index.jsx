@@ -1,16 +1,70 @@
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const Index = () => {
+  const controls = useAnimation();
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
+
+  const testimonials = [
+    {
+      quote: "The best kebabs I've ever tasted! The flavors are incredible and the service is top-notch.",
+      name: "Sarah Johnson",
+      image: "/images/avatar1.jpg",
+    },
+    {
+      quote: "Kebab Delight never disappoints. Their vegetarian options are just as delicious as the meat dishes.",
+      name: "Michael Chen",
+      image: "/images/avatar2.jpg",
+    },
+  ];
+
   return (
     <div className="container mx-auto px-4 py-8">
       <section className="relative h-[500px] rounded-lg overflow-hidden mb-12">
         <img src="/images/restaurant.jpg" alt="Kebab Delight restaurant interior" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">Welcome to Kebab Delight</h1>
-            <p className="text-xl text-white mb-6">Experience the authentic taste of Mediterranean cuisine</p>
-            <Button size="lg">Order Now</Button>
+            <motion.h1
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-4xl md:text-6xl font-bold text-white mb-4"
+            >
+              Welcome to Kebab Delight
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="text-xl text-white mb-6"
+            >
+              Experience the authentic taste of Mediterranean cuisine
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              <Button size="lg">Order Now</Button>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -30,29 +84,53 @@ const Index = () => {
             { image: "/images/kebab2.jpg", title: "Grilled Beef Kebab" },
             { image: "/images/kebab3.jpg", title: "Vegetarian Kebab Skewer" }
           ].map((item, index) => (
-            <Card key={index}>
-              <CardHeader>
-                <img src={item.image} alt={item.title} className="w-full h-48 object-cover rounded-t-lg" />
-              </CardHeader>
-              <CardContent>
-                <CardTitle className="mb-2">{item.title}</CardTitle>
-                <p className="text-muted-foreground">A mouth-watering blend of spices and tender ingredients, grilled to perfection.</p>
-              </CardContent>
-            </Card>
+            <motion.div
+              key={index}
+              initial="hidden"
+              animate="visible"
+              variants={cardVariants}
+              transition={{ delay: index * 0.2 }}
+            >
+              <Card>
+                <CardHeader>
+                  <img src={item.image} alt={item.title} className="w-full h-48 object-cover rounded-t-lg" />
+                </CardHeader>
+                <CardContent>
+                  <CardTitle className="mb-2">{item.title}</CardTitle>
+                  <p className="text-muted-foreground">A mouth-watering blend of spices and tender ingredients, grilled to perfection.</p>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </section>
 
-      <section>
+      <section ref={ref}>
         <h2 className="text-3xl font-semibold mb-6">Customer Testimonials</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {[1, 2].map((item) => (
-            <Card key={item}>
-              <CardContent className="pt-6">
-                <p className="italic mb-4">"The best kebabs I've ever tasted! The flavors are incredible and the service is top-notch."</p>
-                <p className="font-semibold">- Happy Customer {item}</p>
-              </CardContent>
-            </Card>
+          {testimonials.map((testimonial, index) => (
+            <motion.div
+              key={index}
+              variants={cardVariants}
+              initial="hidden"
+              animate={controls}
+              transition={{ delay: index * 0.3 }}
+            >
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="flex items-center mb-4">
+                    <Avatar className="h-10 w-10 mr-4">
+                      <AvatarImage src={testimonial.image} alt={testimonial.name} />
+                      <AvatarFallback>{testimonial.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <p className="font-semibold">{testimonial.name}</p>
+                    </div>
+                  </div>
+                  <p className="italic mb-4">"{testimonial.quote}"</p>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </section>
