@@ -69,11 +69,19 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="mb-12">
-        <h2 className="text-3xl font-semibold mb-6">About Us</h2>
-        <p className="text-lg text-muted-foreground">
-          Kebab Delight brings the rich flavors of Mediterranean cuisine to your table. Our passion for authentic recipes and fresh ingredients ensures an unforgettable dining experience.
-        </p>
+      <section className="mb-12 bg-gradient-to-r from-orange-100 to-yellow-100 rounded-lg p-8 shadow-lg">
+        <h2 className="text-3xl font-semibold mb-6 text-center">About Us</h2>
+        <div className="flex flex-col md:flex-row items-center gap-8">
+          <div className="md:w-1/2">
+            <img src="/images/chef.jpg" alt="Our Chef" className="rounded-lg shadow-md w-full h-64 object-cover" />
+          </div>
+          <div className="md:w-1/2">
+            <p className="text-lg text-gray-700 leading-relaxed">
+              Kebab Delight brings the rich flavors of Mediterranean cuisine to your table. Our passion for authentic recipes and fresh ingredients ensures an unforgettable dining experience. With a team of skilled chefs and a warm, inviting atmosphere, we strive to make every visit special.
+            </p>
+            <Button className="mt-4" variant="outline">Learn More</Button>
+          </div>
+        </div>
       </section>
 
       <section className="mb-12">
@@ -91,10 +99,10 @@ const Index = () => {
               variants={cardVariants}
               transition={{ delay: index * 0.2 }}
             >
-              <Card>
+              <Card className="h-full">
                 <CardHeader className="p-0">
                   <div className="aspect-w-16 aspect-h-9">
-                    <img src={item.image} alt={item.title} className="w-full h-full object-cover rounded-t-lg" />
+                    <img src={item.image} alt={item.title} className="w-full h-64 object-cover rounded-t-lg" />
                   </div>
                 </CardHeader>
                 <CardContent className="p-4">
