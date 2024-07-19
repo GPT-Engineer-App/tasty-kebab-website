@@ -56,7 +56,7 @@ const About = () => {
             <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-300">
               <CardContent className="pt-6">
                 <Avatar className="w-24 h-24 mx-auto mb-4">
-                  <AvatarImage src={member.image} alt={member.name} />
+                  <AvatarImage src={member.image} alt={member.name} className="object-cover" />
                   <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                 </Avatar>
                 <h3 className="text-xl font-semibold mb-2 text-orange-500">{member.name}</h3>
