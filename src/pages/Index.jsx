@@ -5,7 +5,7 @@ const Index = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <section className="relative h-[500px] rounded-lg overflow-hidden mb-12">
-        <img src="/placeholder.svg" alt="Kebab hero" className="w-full h-full object-cover" />
+        <img src="/images/restaurant.jpg" alt="Kebab restaurant" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">Welcome to Kebab Delight</h1>
@@ -25,13 +25,17 @@ const Index = () => {
       <section className="mb-12">
         <h2 className="text-3xl font-semibold mb-6">Featured Dishes</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[1, 2, 3].map((item) => (
-            <Card key={item}>
+          {[
+            { image: "/images/kebab1.jpg", title: "Lula Kebab" },
+            { image: "/images/kebab2.jpg", title: "Seekh Kebab" },
+            { image: "/images/kebab3.jpg", title: "Shish Kebab" }
+          ].map((item, index) => (
+            <Card key={index}>
               <CardHeader>
-                <img src="/placeholder.svg" alt={`Featured dish ${item}`} className="w-full h-48 object-cover rounded-t-lg" />
+                <img src={item.image} alt={item.title} className="w-full h-48 object-cover rounded-t-lg" />
               </CardHeader>
               <CardContent>
-                <CardTitle className="mb-2">Delicious Kebab {item}</CardTitle>
+                <CardTitle className="mb-2">{item.title}</CardTitle>
                 <p className="text-muted-foreground">A mouth-watering blend of spices and tender meat, grilled to perfection.</p>
               </CardContent>
             </Card>
