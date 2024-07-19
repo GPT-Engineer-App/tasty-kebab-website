@@ -1,28 +1,9 @@
-import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { motion, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import { motion } from "framer-motion";
 
 const Index = () => {
-  const controls = useAnimation();
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
-  useEffect(() => {
-    if (inView) {
-      controls.start("visible");
-    }
-  }, [controls, inView]);
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  };
-
   const testimonials = [
     {
       quote: "The best kebabs I've ever tasted! The flavors are incredible and the service is top-notch.",
@@ -45,7 +26,7 @@ const Index = () => {
             <motion.h1
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.5 }}
               className="text-4xl md:text-6xl font-bold text-white mb-4"
             >
               Welcome to Kebab Delight
@@ -53,7 +34,7 @@ const Index = () => {
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
               className="text-xl text-white mb-6"
             >
               Experience the authentic taste of Mediterranean cuisine
@@ -61,7 +42,7 @@ const Index = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
             >
               <Button size="lg">Order Now</Button>
             </motion.div>
@@ -94,10 +75,9 @@ const Index = () => {
           ].map((item, index) => (
             <motion.div
               key={index}
-              initial="hidden"
-              animate="visible"
-              variants={cardVariants}
-              transition={{ delay: index * 0.2 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <Card className="h-full">
                 <CardHeader className="p-0">
@@ -115,16 +95,15 @@ const Index = () => {
         </div>
       </section>
 
-      <section ref={ref}>
+      <section>
         <h2 className="text-3xl font-semibold mb-6">Customer Testimonials</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={index}
-              variants={cardVariants}
-              initial="hidden"
-              animate={controls}
-              transition={{ delay: index * 0.3 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <Card>
                 <CardContent className="pt-6">
