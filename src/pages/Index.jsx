@@ -92,10 +92,12 @@ const Index = () => {
               transition={{ delay: index * 0.2 }}
             >
               <Card>
-                <CardHeader>
-                  <img src={item.image} alt={item.title} className="w-full h-48 object-cover rounded-t-lg" />
+                <CardHeader className="p-0">
+                  <div className="aspect-w-16 aspect-h-9">
+                    <img src={item.image} alt={item.title} className="w-full h-full object-cover rounded-t-lg" />
+                  </div>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="p-4">
                   <CardTitle className="mb-2">{item.title}</CardTitle>
                   <p className="text-muted-foreground">A mouth-watering blend of spices and tender ingredients, grilled to perfection.</p>
                 </CardContent>
@@ -119,8 +121,8 @@ const Index = () => {
               <Card>
                 <CardContent className="pt-6">
                   <div className="flex items-center mb-4">
-                    <Avatar className="h-10 w-10 mr-4">
-                      <AvatarImage src={testimonial.image} alt={testimonial.name} />
+                    <Avatar className="h-12 w-12 mr-4">
+                      <AvatarImage src={testimonial.image} alt={testimonial.name} className="object-cover" />
                       <AvatarFallback>{testimonial.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                     </Avatar>
                     <div>
