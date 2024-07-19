@@ -8,7 +8,7 @@ const About = () => {
         <p className="text-lg text-muted-foreground mb-4">
           Founded in 2010, Kebab Delight has been serving authentic Mediterranean cuisine to food lovers in the heart of the city. Our passion for traditional recipes and commitment to using the freshest ingredients has made us a favorite among locals and tourists alike.
         </p>
-        <img src="/images/restaurant.jpg" alt="Restaurant interior" className="w-full h-64 object-cover rounded-lg mb-4" />
+        <img src="/images/restaurant.jpg" alt="Kebab Delight restaurant interior" className="w-full h-64 object-cover rounded-lg mb-4" />
       </section>
 
       <section className="mb-12">
